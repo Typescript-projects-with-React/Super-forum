@@ -1,0 +1,7 @@
+.error-container{
+    margin:0 auto;
+    max-width: 500px;
+    border-color: black;
+    background-color: khaki;
+    border-radius: 10px;
+}

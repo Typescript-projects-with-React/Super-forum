@@ -1,0 +1,102 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+union ThreadArrayResult = EntityResult | ThreadArray
+
+union ThreadItemArrayResult = EntityResult | ThreadItemArray
+
+union ThreadResult = EntityResult | Thread
+
+union UserResult = EntityResult | User
+
+type EntityResult {
+    messages: [String!]
+}
+
+type Mutation {
+    createThread(body: String!, categoryId: ID!, title: String!, userId: ID!): EntityResult
+    createThreadItem(body: String, threadId: ID!, userId: ID!): EntityResult
+    login(password: String!, userName: String!): String!
+    logout(userName: String!): String!
+    register(email: String!, password: String!, userName: String!): String!
+    updateThreadPoint(increment: Boolean!, threadId: ID!, userId: ID!): String!
+}
+
+type Query {
+    getAllCategories: [ThreadCategory!]
+    getThreadById(id: ID!): ThreadResult
+    getThreadItemsByThreadId(threadId: ID!): ThreadItemArrayResult!
+    getThreadsByCategoryId(categoryId: ID!): ThreadArrayResult!
+    getThreadsLatest: ThreadArrayResult!
+    me: UserResult!
+}
+
+type Thread {
+    body: String!
+    category: ThreadCategory
+    createdBy: String!
+    createdOn: Date!
+    id: ID!
+    isDisabled: Boolean!
+    lastModifiedBy: String!
+    lastModifiedOn: Date!
+    points: Int!
+    threadItems: [ThreadItem!]
+    title: String!
+    user: User!
+    views: Int!
+}
+
+type ThreadArray {
+    threads: [Thread!]
+}
+
+type ThreadCategory {
+    createdBy: String!
+    createdOn: Date!
+    description: String
+    id: ID!
+    lastModifiedBy: String!
+    lastModifiedOn: Date!
+    name: String!
+    threads: [Thread!]!
+}
+
+type ThreadItem {
+    body: String!
+    createdBy: String!
+    createdOn: Date!
+    id: ID!
+    isDisabled: Boolean!
+    lastModifiedBy: String!
+    lastModifiedOn: Date!
+    points: Int!
+    thread: Thread!
+    user: User!
+    views: Int!
+}
+
+type ThreadItemArray {
+    threadItems: [ThreadItem!]
+}
+
+type User {
+    confirmed: Boolean!
+    createdBy: String!
+    createdOn: Date!
+    email: String!
+    id: ID!
+    isDisabled: Boolean!
+    lastModifiedBy: String!
+    lastModifiedOn: Date!
+    password: String!
+    threads: [Thread!]
+    userName: String!
+}
+
+
+scalar Date
