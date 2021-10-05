@@ -119,6 +119,7 @@ const resolvers:IResolvers={
                             ctx: GqlContext,
                             info: any):Promise<  Array<ThreadCategory>  | EntityResult> =>{
       let categories:QueryArrayResult<ThreadCategory>;
+      console.log("~~~~~~~~~~~~~~~~~~~~~~Checking category~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
       try {
         categories = await getAllCategories()
 

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import MainHeader from "./MainHeader";
 import { useParams } from "react-router-dom";
 import ThreadCard from "./ThreadCard";
-import { getThreadsByCategory } from "../../../services/DataService";
 import Category from "../../../models/Category";
 import {gql, useLazyQuery} from "@apollo/client";
 
@@ -68,8 +67,8 @@ const GetThreadsLatest = gql`
 const Main = () => {
   const [execGetThreadsByCat,
     {
-      //error: threadsByCatErr,
-      //called: threadsByCatCalled,
+      error: threadsByCatErr,
+      called: threadsByCatCalled,
       data: threadsByCatData,
     },  ] = useLazyQuery(GetThreadsByCategoryId);
   const [    execGetThreadsLatest,
@@ -81,9 +80,10 @@ const Main = () => {
 
   const { categoryId } = useParams<{ categoryId: string }>();
   const [category, setCategory] = useState<Category | undefined>();
-  const [threadCards, setThreadCards] = useState<Array<JSX.Element> | null>(
-    null
-  );
+  const [threadCards, setThreadCards] = useState<Array<JSX.Element> | null>(null);
+  console.log("Main.tsx categoryId", categoryId)
+
+
 
   useEffect(() => {
     if (categoryId && Number(categoryId) > 0) {
